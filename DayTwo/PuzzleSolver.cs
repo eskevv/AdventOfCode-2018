@@ -37,7 +37,7 @@ public class PuzzleSolver
          ReadID(item, ref twoLetters, ref threeLetters);
       }
 
-      return twoLetters * twoLetters;
+      return twoLetters * threeLetters;
    }
 
    private void ReadID(string id, ref int twoLetters, ref int threeLetters)
