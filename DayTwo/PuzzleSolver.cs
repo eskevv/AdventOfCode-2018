@@ -70,7 +70,7 @@ public class PuzzleSolver
          for (int y = x + 1; y < ids.Length; y++)
          {
             _commonBoxes = CompareIds(ids[x], ids[y]);
-            if (_commonBoxes != null )return _commonBoxes;
+            if (_commonBoxes != null) return _commonBoxes;
          }
       }
 
