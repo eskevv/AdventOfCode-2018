@@ -10,7 +10,7 @@ namespace AoC2018.DayTwo;
 // What letters are common between the two correct box IDs? 
 */
 
-public class PuzzleSolver
+public class PuzzleSolver : ISolver
 {
    private int _checksum;
    private string? _commonBoxes;

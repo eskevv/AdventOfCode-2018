@@ -2,3 +2,4 @@ bin/
 obj/
 .vscode/
 Program.cs
+ISolver.cs
