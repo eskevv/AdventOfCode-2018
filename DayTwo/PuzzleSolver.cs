@@ -20,50 +20,41 @@ public class PuzzleSolver
       // Parse puzzle
       string[] ids = File.ReadAllLines("DayTwo/puzzle.txt");
 
-      // Part One
+      // Solve
       _checksum = FindCheckSum(ids);
-
-      // Part Two
       _commonBoxes = FindCommonCode(ids);
    }
 
-   public int FindCheckSum(string[] ids)
+   // Part One
+
+   private int FindCheckSum(string[] ids)
    {
       int twoLetters = 0;
       int threeLetters = 0;
 
       foreach (var item in ids)
       {
-         ReadID(item, ref twoLetters, ref threeLetters);
+         Dictionary<char, int> letterCounts = ReadID(item);
+         twoLetters += letterCounts.ContainsValue(2) ? 1 : 0;
+         threeLetters += letterCounts.ContainsValue(3) ? 1 : 0;
       }
-
       return twoLetters * threeLetters;
    }
 
-   private void ReadID(string id, ref int twoLetters, ref int threeLetters)
+   private Dictionary<char, int> ReadID(string id)
    {
       var letterCounts = new Dictionary<char, int>();
-      bool twoAppeared = false;
-      bool threeAppeared = false;
-
       foreach (var item in id)
       {
          bool firstAppearance = !letterCounts.ContainsKey(item);
          letterCounts[item] = firstAppearance ? 1 : letterCounts[item] + 1;
       }
-
-      foreach (var item in letterCounts)
-      {
-         twoAppeared = twoAppeared == true ? true : item.Value == 2;
-         threeAppeared = threeAppeared == true ? true : item.Value == 3;
-         if (twoAppeared && threeAppeared) return;
-      }
-
-      twoLetters += twoAppeared ? 1 : 0;
-      threeLetters += threeAppeared ? 1 : 0;
+      return letterCounts;
    }
 
-   public string? FindCommonCode(string[] ids)
+   // Part Two
+
+   private string? FindCommonCode(string[] ids)
    {
       for (int x = 0; x < ids.Length; x++)
       {
