@@ -10,44 +10,46 @@ namespace AoC2018.DayOne;
 
 public class PuzzleSolver : ISolver
 {
-   private int _frequencyTotal;
-   private int? _firstReachedTwice;
+    private int _frequencyTotal;
+    private int? _firstReachedTwice;
 
-   public void Solve()
-   {
-      string[] parsedData = File.ReadAllLines("DayOne/puzzle.txt");
-      int[] frequencies = parsedData.ToList().Select(x => int.Parse(x)).ToArray();
+    public void Solve()
+    {
+        // parse
+        string[] parsedData = File.ReadAllLines("DayOne/puzzle.txt");
+        int[] frequencies = parsedData.ToList().Select(x => int.Parse(x)).ToArray();
 
-      _frequencyTotal = FindTotalFrequency(frequencies);
-      _firstReachedTwice = FindFrequencyDuplicate(frequencies, 999999999);
-   }
+        // solve
+        _frequencyTotal = FindTotalFrequency(frequencies);
+        _firstReachedTwice = FindFrequencyDuplicate(frequencies, 999999999);
+    }
 
-   // Part One
+    // Part One
 
-   private int FindTotalFrequency(int[] frequencies)
-   {
-      int total = 0;
-      Array.ForEach(frequencies, x => { total += x; });
-      return total;
-   }
+    private int FindTotalFrequency(int[] frequencies)
+    {
+        int total = 0;
+        Array.ForEach(frequencies, x => { total += x; });
+        return total;
+    }
 
-   // Part Two
+    // Part Two
 
-   private int? FindFrequencyDuplicate(int[] frequencies, int maxIterations)
-   {
-      var results = new HashSet<int>() { 0 };
-      int total = 0;
+    private int? FindFrequencyDuplicate(int[] frequencies, int maxIterations)
+    {
+        var results = new HashSet<int>() { 0 };
+        int total = 0;
 
-      int currentIterations = 0;
-      while (true)
-      {
-         foreach (var item in frequencies)
-         {
-            total += item;
-            if (!results.Add(total)) return total;
-         }
+        int currentIterations = 0;
+        while (true)
+        {
+            foreach (var item in frequencies)
+            {
+                total += item;
+                if (!results.Add(total)) return total;
+            }
 
-         if (++currentIterations >= maxIterations) return null;
-      }
-   }
+            if (++currentIterations >= maxIterations) return null;
+        }
+    }
 }
